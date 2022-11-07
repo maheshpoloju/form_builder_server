@@ -2,13 +2,12 @@ const router = require("express").Router();
 
 const { Form } = require("../models/formModel");
 
-router.post("/form/create", async (req, res) => {
-  // console.log("data---------", data);
-
+router.get("/form/edit/:id", async (req, res) => {
   try {
-    let data = req.body;
+    const { id } = req.params;
+    const data = await Form.findById(id);
 
-    await Form.create(data);
+    res.send(data);
   } catch (error) {
     console.log("error", error);
   }
